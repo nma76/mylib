@@ -1,0 +1,19 @@
+Grundläggande nivå:
+my_strlen       Klar
+my_strcmp       Klar
+my_strcpy       Klar
+my_memcpy       Klar
+my_memset       Klar
+my_strchr
+
+Egna Linux-anrop
+my_write
+my_read
+my_puts
+my_putchar
+
+Lite algoritmer
+my_atoi
+my_itoa
+
+Ett mini-fastetch i ren assembler

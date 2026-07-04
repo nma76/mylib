@@ -1,0 +1,41 @@
+# Object files
+*.o
+
+# Static libraries
+*.a
+
+# Shared libraries
+*.so
+*.so.*
+
+# Executables
+test_*
+
+# Debug symbols
+*.dSYM/
+
+# Core dumps
+core
+core.*
+
+# Build directories
+build/
+bin/
+out/
+
+# Make-generated dependency files (if you start using -MMD)
+*.d
+
+# Editor settings
+.vscode/
+.idea/
+
+# Vim
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Temporary files
+*~
