@@ -4,16 +4,18 @@ CFLAGS=-Wall -Iinclude
 SRC=$(wildcard src/*.S)
 OBJ=$(SRC:.S=.o)
 
-all: libmylib.a
+TEST_SRC=$(wildcard tests/*.c)
+TEST_BIN:=$(TEST_SRC:.c=)
+
+all: libmylib.a tests
 
 libmylib.a: $(OBJ)
 	ar rcs $@ $(OBJ)
 
-# Todo: Build C-prg
-#gcc test/main.c -Iinclude -L. -lmylib -o testprog
+tests: libmylib.a $(TEST_BIN)
 
-#test/main.c – C-källkoden.
-#-Iinclude – leta efter headers i include/.
-#-L. – leta efter bibliotek i aktuell katalog.
-#-lmylib – länka mot libmylib.a.
-#-o testprog – skapa programmet testprog.
+%: %.c libmylib.a
+	$(CC) $(CFLAGS) $< -L. -lmylib -o $@
+
+clean:
+	rm -f src/*.o libmylib.a bin/*
