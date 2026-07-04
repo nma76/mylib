@@ -1,11 +1,11 @@
 CC=gcc
 CFLAGS=-Wall -Iinclude
 
-SRC=$(wildcard src/*.S)
-OBJ=$(SRC:.S=.o)
+SRC := $(wildcard src/*.S)
+OBJ := $(patsubst src/%.S,obj/%.o,$(SRC))
 
-TEST_SRC=$(wildcard tests/*.c)
-TEST_BIN:=$(TEST_SRC:.c=)
+TEST_SRC := $(wildcard tests/*.c)
+TEST_BIN := $(addprefix bin/,$(notdir $(TEST_SRC:.c=)))
 
 all: libmylib.a tests
 
@@ -14,8 +14,11 @@ libmylib.a: $(OBJ)
 
 tests: libmylib.a $(TEST_BIN)
 
-%: %.c libmylib.a
+bin/%: tests/%.c libmylib.a
 	$(CC) $(CFLAGS) $< -L. -lmylib -o $@
 
+obj/%.o: src/%.S
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f src/*.o libmylib.a bin/*
+	rm -f libmylib.a bin/* obj/*
