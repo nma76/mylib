@@ -4,10 +4,10 @@ my_strcmp       Klar
 my_strcpy       Klar
 my_memcpy       Klar
 my_memset       Klar
-my_strchr
+my_strchr       Klar
 
 Egna Linux-anrop
-my_write
+my_write        Pågår
 my_read
 my_puts
 my_putchar
@@ -16,4 +16,5 @@ Lite algoritmer
 my_atoi
 my_itoa
 
+Slutmålet (en modern variant av min 30 år gamla kod)
 Ett mini-fastetch i ren assembler

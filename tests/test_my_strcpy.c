@@ -8,11 +8,12 @@ int main(void)
     char d[6];
 
     // copy string
-    my_strcpy(d, s);
+    char *r = my_strcpy(d, s);
 
     // print result
     printf("Source string: %s\n", s);
     printf("Destination string: %s\n", d);
+    printf("Returned value: %s\n", r);
 
     return 0;
 }

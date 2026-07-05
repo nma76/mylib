@@ -6,6 +6,7 @@
 .text
 
 my_memset:
+    and w1, w1, #0xFF       // mask the lowest byte
     cbz x2, done            // early exit if x2 is zero
     mov x4, x0              // store original pointer to dest in x4
 

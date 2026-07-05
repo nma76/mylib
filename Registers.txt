@@ -1,0 +1,23 @@
+General-Purpose Registers (X0-X30 / W0-W30)
+X0-X7: Used for passing arguments to subroutines and returning results.
+X8: Indirect result location register (used to return large structures).
+X9-X15: Temporary/scratch registers.
+X16-X17: Intra-procedure-call temporary registers (IP0, IP1).
+X18: Platform register (reserved for the OS or specific ABI uses).
+X19-X28: Callee-saved registers (values must be preserved across function calls).
+X29: Frame Pointer (FP), used to keep track of the stack frame.
+X30: Link Register (LR), stores the return address for function calls.
+
+------------------------------------------------------------------------------------------
+
+x0-x7   = "Här kommer världen in"
+x8      = "Specialisten"
+x9-x15  = "Verkstadsbänken"
+x19-x28 = "Arkivet"
+sp      = "Golvet"
+lr/x30  = "Hemadressen"
+
+-------------------------------------------------------------------
+
+syscall:
+https://arm64.syscall.sh
