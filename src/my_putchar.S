@@ -7,8 +7,7 @@ my_putchar:
     // PROLOGUE: often used to store x29 and x30
     str x30, [sp, #-16]!        // allocate 16 bytes on the stack, store x30 (link register, return address)  
 
-    //sub sp, sp, #16           // no need to allocate more room, we have 8 bytes free since x30 is only 8 bytes!
-    strb w0, [sp, #8]           // store character on the stack 8 bytes in to not overwrite the stored x30
+    strb w0, [sp, #8]           // store character on the stack, 8 bytes in, to not overwrite the stored x30
 
     // prepare registers for my_write
     mov x0, #1                  // set file descriptro to 1
@@ -17,8 +16,7 @@ my_putchar:
     bl my_write                 // call my_write
 
     // EPILOGUE: often used to restore x29 and x30
-    //add sp, sp, #16           // no need to restore these 16 bytes as we never allocated them in the first place!
     ldr x30, [sp], #16          // restore x30 from stack
 
-    ldr x0, [x1], #8            // put printed char in x0 so it's returned
+    ldr x0, [x1], #8            // restore saved char to x0 before return
     ret

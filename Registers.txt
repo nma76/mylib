@@ -19,5 +19,12 @@ lr/x30  = "Hemadressen"
 
 -------------------------------------------------------------------
 
+x0–x7: argument, returvärden och caller-saved. Använd dem gärna inom en funktion, men räkna inte med att de innehåller samma värden efter ett bl.
+x9–x15: temporära arbetsregister. Samma sak här – de är caller-saved och får ändras av den anropade funktionen.
+x19–x28: callee-saved. Om du använder något av dem i en funktion måste du också återställa det innan ret, eftersom den som anropade dig har rätt att förvänta sig att de är oförändrade.
+
+-------------------------------------------------------------------
+
+
 syscall:
 https://arm64.syscall.sh
