@@ -1,0 +1,8 @@
+    // PROLOGUE: make room for x29 (frame pointer) and x30 (link register) on the stack. 16 bytes
+    stp x29, x30, [sp, #-16]!   // save x29 and x30 on the stack
+    mov x29, sp                 // update x29 with the new stack pointer
+
+
+    // EPILOGUE
+    add sp, sp, #16             // restore allocated bytes
+    ldp x29, x30, [sp], #16     // restore x29, x30 and stack
