@@ -7,7 +7,8 @@ int main(void)
     char c = 'A';
 
     // print character
-    my_putchar(c);
+    int r = my_putchar(c);
+    printf("\nReturn value was: %d\n", r);
 
     return 0;
 }

@@ -10,7 +10,7 @@ X30: Link Register (LR), stores the return address for function calls.
 
 ------------------------------------------------------------------------------------------
 
-x0-x7   = "Här kommer världen in"
+x0-x7   = "Här kommer värden in"
 x8      = "Specialisten"
 x9-x15  = "Verkstadsbänken"
 x19-x28 = "Arkivet"
