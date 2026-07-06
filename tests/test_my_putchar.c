@@ -4,7 +4,7 @@
 int main(void)
 {
     // message to print
-    char c = 'A';
+    char c = ' ';
 
     // print character
     int r = my_putchar(c);

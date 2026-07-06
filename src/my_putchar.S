@@ -15,8 +15,9 @@ my_putchar:
     mov x2, #1                  // one byte
     bl my_write                 // call my_write
 
+    ldrb w0, [sp, #8]           // read saved char to x0 before return, and before vi restoring stack!
+
     // EPILOGUE: often used to restore x29 and x30
     ldr x30, [sp], #16          // restore x30 from stack
 
-    ldr x0, [x1], #8            // restore saved char to x0 before return
     ret
