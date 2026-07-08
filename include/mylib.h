@@ -9,6 +9,7 @@ void *my_memcpy(void *restrict dest, const void *restrict src, size_t n);
 void *my_memset(void *dest, int c, size_t n);
 
 ssize_t my_write(int fd, const void *buf, size_t count);
+ssize_t my_read(int fd, void *buf, size_t count);
 int my_putchar(int c);
 int my_puts(const char *str);
 
