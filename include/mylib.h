@@ -10,5 +10,6 @@ void *my_memset(void *dest, int c, size_t n);
 
 ssize_t my_write(int fd, const void *buf, size_t count);
 int my_putchar(int c);
+int my_puts(const char *str);
 
 #endif

@@ -7,10 +7,10 @@ my_memset       Klar
 my_strchr       Klar
 
 Egna Linux-anrop
-my_write        Pågår
+my_write        klar
+my_putchar      Klar
+my_puts         pågår
 my_read
-my_puts
-my_putchar
 
 Lite algoritmer
 my_atoi
