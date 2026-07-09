@@ -9,8 +9,8 @@ my_strchr       Klar
 Egna Linux-anrop
 my_write        klar
 my_putchar      Klar
-my_puts         pågår
-my_read
+my_puts         Klar
+my_read         Klar
 
 Lite algoritmer
 my_atoi
