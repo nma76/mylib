@@ -6,7 +6,7 @@
 
 my_puts:
     // PROLOGUE: often used to store x29 and x30
-    str x30, [sp, #-16]!        // allocate 16 bytes on the stack and store x30 (link register, return address). We only need 24 nytes, but we allocate in blocks of 16 to follow ABI!
+    str x30, [sp, #-16]!        // allocate 16 bytes on the stack and store x30 (link register, return address).
 
     // we store x0 since later calls will overwrite it with it's return values
     str x0, [sp, #8]           // store pointer in x0 on the stack, 8 bytes in, to not overwrite the stored x30
