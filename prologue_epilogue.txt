@@ -1,3 +1,21 @@
+    // ==========================================
+    // PROLOGUE (Enligt AAPCS standard)
+    // ==========================================
+    stp x29, x30, [sp, #-16]!   // Allokera 16 bytes OCH spara x29/x30
+    mov x29, sp                 // Uppdatera frame pointer till nuvarande stacktop
+
+    // ------------------------------------------
+    // DIN KOD HÄR
+    // ------------------------------------------
+
+    // ==========================================
+    // EPILOGUE (Enligt AAPCS standard)
+    // ==========================================
+    ldp x29, x30, [sp], #16     // Återställ x29/x30 OCH frigör de 16 byten samtidigt
+    ret
+
+-----------------------------------------------------------------------
+
     // PROLOGUE: make room for x29 (frame pointer) and x30 (link register) on the stack. 16 bytes
     stp x29, x30, [sp, #-16]!   // save x29 and x30 on the stack
     mov x29, sp                 // update x29 with the new stack pointer
