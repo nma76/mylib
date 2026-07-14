@@ -6,7 +6,7 @@
 //      x1 is character to find
 // returns:
 //     pointer to the remaining string if char is found
-
+//
 // temporary registers:
 //      w9  holds the current char
 

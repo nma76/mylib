@@ -6,7 +6,7 @@
 //      x1 is pointer to source
 // returns:
 //     pointer to destination
-
+//
 // temporary registers:
 //      x9  holds the original pointer sent to x0
 //      w10 holds the current character

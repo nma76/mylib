@@ -6,7 +6,7 @@
 //      x1 is pointer to string two
 // returns:
 //     integer < 0 if string one is less, > 0 if string two is less and 0 if equal
-
+//
 // temporary registers:
 //      w9  current char from string one
 //      w10 current char from string two

@@ -5,7 +5,7 @@
 //      x0 is pointer to our string
 // returns:
 //     size_t, length of string
-
+//
 // temporary registers:
 //      w9  holds the current character
 //      w10 holds our counter
