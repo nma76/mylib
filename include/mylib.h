@@ -16,6 +16,6 @@ int my_puts(const char *str);
 int my_getchar(void);
 
 bool my_atoi(const char *source, int *value);
-//int my_atoi(const char * source);
+bool my_itoa(int value, char *dest);
 
 #endif

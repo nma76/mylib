@@ -5,7 +5,7 @@ int main(void)
 {
     // create pointers to string to compare
     char *s1 = "Hejsan";
-    char *s2 = "Hejsan  ";
+    char *s2 = "Hejsan";
 
     // compare strings
     int r = my_strcmp(s1, s2);

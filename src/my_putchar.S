@@ -1,5 +1,10 @@
 .global my_putchar
-// x0 is character to write
+// Write one character to stdout
+//
+// Input:
+//      x0 is character to write
+// returns:
+//     integer representation of char written
 
 .text
 

@@ -1,6 +1,10 @@
 .global my_puts
-// x0 is pointer to string
-// returns: on success, a non-negative value. Often the length written
+// Write string to stdout
+//
+// Input:
+//      x0 is pointer to string
+// returns:
+//     on success, a non-negative value, the length written in bytes
 
 .text
 

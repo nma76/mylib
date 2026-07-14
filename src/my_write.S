@@ -1,7 +1,12 @@
 .global my_write
-// x0 is file descriptor
-// x1 is pointer to buffer
-// x2 is number of bytes
+// Write to stdout
+//
+// Input:
+//      x0 is file descriptor
+//      x1 is pointer to buffer
+//      x2 is number of bytes
+// returns:
+//     ssize_t, size of data written
 
 .text
 

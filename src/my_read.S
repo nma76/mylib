@@ -1,5 +1,5 @@
 .global my_read
-// Search a string for a specific character
+// Reads from stdin
 //
 // Input:
 //      x0 is file descriptor

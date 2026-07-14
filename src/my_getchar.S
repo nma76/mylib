@@ -1,6 +1,7 @@
 .global my_getchar
-// no argument passed
-// returns either:
+// Read one char from stdin
+//
+// returns:
 //      char read as int
 //      EOF, -1
 //      error, -1
