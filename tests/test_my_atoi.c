@@ -4,7 +4,7 @@
 int main(void)
 {
     // string values to parse with my_atoi
-    const char *source[] = { "23", "543", "-42", "+42", "+1+42", "", " ", "abx", "12 abc", "abc 123" };
+    const char *source[] = { "   123", "23", "543", "123-456", "-42", "+42", "+1+42", "", " ", "abx", "12 abc", "abc 123" };
 
     // get number of strings to test
     int arr_length = sizeof(source) / sizeof(source[0]);

@@ -1,11 +1,25 @@
 .global my_atoi
-// x0 is pointer to source string
-// x1 is pointer to int value, the result
+// Parse string and returns integer at the beginning. 
+// It accepts initial whitespaces, plus and minus signs. As soon as we found a digit, whitespaces, plus and minus are treated as any other character
+//
+// Accepted:
+//      "123"
+//      "   -123"
+//      "+123abc"
+//
+// Rejected:
+//      ""
+//      "abc123"
+//      "+"
+//
+// Input:
+//      x0 is pointer to source string
+//      x1 is pointer to int value, the result
 // returns:
 //     bool signaling if function is successfull or not
-
+//
 // temporary registers:
-//      w9 holds the current character
+//      w9  holds the current character
 //      w10 current digit if any is found
 //      w11 holds the result until we are finnished. Then it goes into our pointer at x1
 //      w12 holds our multiplier: the number 10. MADD (Multiply-Add) needs registry, not values
