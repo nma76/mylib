@@ -1,19 +1,28 @@
 .global my_strcmp
-// x0 is pointer to string one
-// x1 is pointer to string two
+// Compare two strings
+//
+// Input:
+//      x0 is pointer to string one
+//      x1 is pointer to string two
+// returns:
+//     integer < 0 if string one is less, > 0 if string two is less and 0 if equal
+
+// temporary registers:
+//      w9  current char from string one
+//      w10 current char from string two
 
 .text
 
 my_strcmp:
 
 loop:
-    ldrb w2, [x0], #1       // read first character from x0 into w2 and increate pointer by one
-    ldrb w3, [x1], #1       // read first character from x1 into w3 and increase pointer by one
-    cmp w2, w3              // compare characters 
+    ldrb w9, [x0], #1       // read first character from x0 into w9 and increate pointer by one
+    ldrb w10, [x1], #1       // read first character from x1 into w3 and increase pointer by one
+    cmp w9, w10              // compare characters 
     b.ne done               // characters are not equal, exit
-    cbz w2, done            // if equal and zero, exit
+    cbz w9, done            // if equal and zero, exit
     b loop                  // else back to loop and read next character
 
 done:
-    sub w0, w2, w3          // set the difference as return value
+    sub w0, w9, w10          // set the difference as return value
     ret
