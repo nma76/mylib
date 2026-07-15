@@ -13,8 +13,59 @@ my_puts         Klar
 my_read         Klar
 
 Lite algoritmer
-my_atoi
-my_itoa
+my_atoi         Klar
+my_itoa         Klar
+
 
 Slutmålet (en modern variant av min 30 år gamla kod)
 Ett mini-fastetch i ren assembler
+
+--------------------------------------------------------------------------------------------------
+
+Milstolpe 2
+Nu vill jag bygga något som faktiskt använder biblioteket.
+Inte mycket.
+Typ:
+Hello world!
+42
+Där använder vi
+my_puts()
+my_itoa()
+
+
+
+Milstolpe 3
+Sedan skulle jag bygga något som jag tycker är en perfekt mellanövning.
+
+argc
+argv
+
+Inte för att jonasinfo behöver argument.
+Utan för att du kommer att lära dig hur Linux faktiskt startar en process.
+Det är något de flesta C-programmerare aldrig får se, eftersom C-runtime döljer allt detta bakom main().
+Jag tror att det kommer bli både lärorikt och väldigt roligt, eftersom det ger en djupare förståelse för vad som faktiskt händer innan ditt program börjar exekvera.
+
+Milstolpe 4
+
+Sedan kommer den första riktiga systeminformationen.
+Inte CPU.
+Inte RAM.
+Inte /proc.
+
+Jag hade börjat med...
+
+🥁
+
+uname
+
+Varför?
+För Linux har redan ett syscall för det.
+Ingen fil behöver öppnas.
+Ingen parser behövs.
+Bara ett syscall.
+Du får direkt ut:
+kernel
+nodename
+release
+version
+machine

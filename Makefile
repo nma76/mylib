@@ -14,8 +14,16 @@ libmylib.a: $(OBJ)
 
 tests: libmylib.a $(TEST_BIN)
 
+hello: libmylib.a bin/hello
+
+bin/hello: obj/hello.o
+	ld $< libmylib.a -o $@
+
 bin/%: tests/%.c libmylib.a
 	$(CC) $(CFLAGS) $< -L. -lmylib -o $@
+
+obj/hello.o: src/apps/hello/start.S
+	as $< -o $@
 
 obj/%.o: src/%.S
 	$(CC) $(CFLAGS) -c $< -o $@
