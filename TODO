@@ -22,16 +22,6 @@ Ett mini-fastetch i ren assembler
 
 --------------------------------------------------------------------------------------------------
 
-Milstolpe 2
-Nu vill jag bygga något som faktiskt använder biblioteket.
-Inte mycket.
-Typ:
-Hello world!
-42
-Där använder vi
-my_puts()
-my_itoa()
-
 
 
 Milstolpe 3

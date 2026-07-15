@@ -1,30 +1,38 @@
 CC=gcc
 CFLAGS=-Wall -Iinclude
 
+# Assemblybibliotek
 SRC := $(wildcard src/*.S)
 OBJ := $(patsubst src/%.S,obj/%.o,$(SRC))
 
+# Tester
 TEST_SRC := $(wildcard tests/*.c)
 TEST_BIN := $(addprefix bin/,$(notdir $(TEST_SRC:.c=)))
 
-all: libmylib.a tests
+# Appar under src/apps/<app>/start.S
+APP_START := $(wildcard src/apps/*/start.S)
+APPS := $(notdir $(patsubst src/apps/%/start.S,%,$(APP_START)))
+APP_BIN := $(addprefix bin/,$(APPS))
+
+all: libmylib.a tests apps
 
 libmylib.a: $(OBJ)
 	ar rcs $@ $(OBJ)
 
 tests: libmylib.a $(TEST_BIN)
 
-hello: libmylib.a bin/hello
+apps: $(APP_BIN)
 
-bin/hello: obj/hello.o
-	ld $< libmylib.a -o $@
-
+# Bygg testbinärer
 bin/%: tests/%.c libmylib.a
 	$(CC) $(CFLAGS) $< -L. -lmylib -o $@
 
-obj/hello.o: src/apps/hello/start.S
-	as $< -o $@
+# Bygg app-binärer från start.S
+bin/%: src/apps/%/start.S libmylib.a
+	as $< -o obj/$*.o
+	ld obj/$*.o libmylib.a -o $@
 
+# Generell regel för .o från src/*.S
 obj/%.o: src/%.S
 	$(CC) $(CFLAGS) -c $< -o $@
 
