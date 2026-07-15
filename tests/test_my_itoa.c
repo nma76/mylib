@@ -4,7 +4,7 @@
 int main(void)
 {
     // value to convert to string
-    int source = 123;
+    int source = 2345;
 
     // destination buffer
     char dest[33];
