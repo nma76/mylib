@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #ifndef MYLIB_H
 #define MYLIB_H
 
@@ -17,5 +19,6 @@ int my_getchar(void);
 
 bool my_atoi(const char *source, int *value);
 bool my_itoa(int value, char *dest);
+bool my_utoa(uint64_t source, char *dest);
 
 #endif

@@ -15,6 +15,8 @@ hex_prefix:
 
 newline:
     .asciz "\n"
+colon:
+    .asciz ":"
 debug:
     .asciz "Debug"
 
@@ -144,12 +146,19 @@ done_env:
     //  3 (AT_PHDR) - Pekare till programmets Program Headers (början av ELF-strukturen i minnet).
     //  7 (AT_BASE) - Basadressen i minnet där den dynamiska länkaren (ld.so) laddades in.
     //  9 (AT_ENTRY) - Den virtuella minnesadressen där programmets kod startar (adressen till _start).
+    //  16 (AT_HWCAP) - Viktig! Detta är den faktiska primära bitmasken för hårdvarustöd på Linux. (Du hade skrivit #26 för AT_HWCAP i din kod, men #26 är egentligen AT_HWCAP2 eller AT_NOTELF).
+    //  18 (AT_FPUCW) - Kontrollord för flyttalsprocessorn (FPU), används mest på äldre x86 men kan dyka upp.
     //  25 (AT_RANDOM) - Pekare till 16 slumpmässiga bytes som operativsystemet skapat (används av kompilatorn för att skapa "stack canaries" som skyddar mot buffertöverskridning).
     //  26 (AT_HWCAP) och 38 (AT_HWCAP2) - Ibland pekare eller bitmasker som talar om vilka processorinstruktioner som stöds (t.ex. om NEON, AES eller CRC32 är aktiverat i hårdvaran).
     //  33 (AT_SYSINFO_EHDR) - Pekare till vDSO (Virtual Dynamic Shared Object). Det är en liten virtuell ELF-fil som operativsystemet mappar in i ditt minne för att göra systemanrop (syscalls) mycket snabbare.
+    //  40 (AT_L1I_CACHESHAPE) - Beskriver geometrin (associativitet, linjestorlek) för L1-instruktionscachen.
+    //  41 (AT_L1D_CACHESHAPE) - Beskriver geometrin för L1-datacachen.
+    //  42 (AT_L2_CACHESHAPE) - Beskriver geometrin för L2-cachen.
+    //  43 (AT_L3_CACHESHAPE) - Beskriver geometrin för L3-cach    
     //
     // Numeric values, safe for itoa
     //  0 (AT_NULL) - Slutmarkör för hela tabellen. Både typ och värde är 0.
+    //  2 (AT_PHNUM)
     //  4 (AT_PHENT) - Storleken i bytes på en enskild Program Header-post (på 64-bit är detta alltid 56 bytes).
     //  5 (AT_PHNUM) - Totalt antal Program Headers som filen innehåller.
     //  6 (AT_PAGESZ) - Systemets minnessidstorlek i bytes (oftast 4096 eller 65536 på ARM64).
@@ -173,65 +182,97 @@ print_aux:
     cbz x21, done_aux       // if x21 is NULL, we have reached the end
     ldr x22, [x20], #8      // load AT_val
 
+    // print numeric value of x21 and a colon    
+    mov x0, x21             // copy x21 to work with my_itoa
+    ldr x1, =buffer         // set output buffer
+    bl my_itoa              // call my_itoa to get the number
+
+    ldr x0, =buffer         // load buffer to print into x0
+    bl my_puts              // and print it
+
+    mov x0, #':'
+    bl my_putchar
+
     // string values
-    cmp x21, #15            // is it AT_PLATFORM
+    cmp x21, #15            
     b.eq print_aux_string
-    cmp x21, #24            // is it AT_BASE_PLATFORM
+    cmp x21, #24            
     b.eq print_aux_string
-    cmp x21, #31            // is it AT_EXECFN
+    cmp x21, #31            
     b.eq print_aux_string
 
     // numeric values
-    cmp x21, #4             //is it AT_PHENT
+    cmp x21, #2             
     b.eq print_aux_numeric
-    cmp x21, #5             //is it AT_PHNUM
+    cmp x21, #4             
     b.eq print_aux_numeric
-    cmp x21, #6             //is it AT_PAGESZ
+    cmp x21, #5             
     b.eq print_aux_numeric
-    cmp x21, #8             //is it AT_FLAGS
+    cmp x21, #6             
     b.eq print_aux_numeric
-    cmp x21, #11            //is it AT_UID
+    cmp x21, #8             
     b.eq print_aux_numeric
-    cmp x21, #12            //is it AT_EUID
+    cmp x21, #11            
     b.eq print_aux_numeric
-    cmp x21, #13            //is it AT_GID
+    cmp x21, #12            
     b.eq print_aux_numeric
-    cmp x21, #14            //is it AT_EGID
+    cmp x21, #13            
     b.eq print_aux_numeric
-    cmp x21, #17            //is it AT_CLKTCK
+    cmp x21, #14            
     b.eq print_aux_numeric
-    cmp x21, #19            //is it AT_DCACHEBSIZE
+    cmp x21, #17            
     b.eq print_aux_numeric
-    cmp x21, #20            //is it AT_ICACHEBSIZE
+    cmp x21, #19            
     b.eq print_aux_numeric
-    cmp x21, #21            //is it AT_UCACHEBSIZE
+    cmp x21, #20            
     b.eq print_aux_numeric
-    cmp x21, #23            //is it AT_SECURE
+    cmp x21, #21            
     b.eq print_aux_numeric
-    cmp x21, #46            //is it AT_MINSIGSTKSZ
+    cmp x21, #23            
+    b.eq print_aux_numeric
+    cmp x21, #46            
     b.eq print_aux_numeric
 
     // print HEX
-    cmp x21, #7             //is it AT_BASE
+    cmp x21, #7             
     b.eq print_aux_hex
-    cmp x21, #9             //is it AT_ENTRY
+    cmp x21, #9             
     b.eq print_aux_hex
-    cmp x21, #26            //is it AT_HWCAP
+    cmp x21, #16            
+    b.eq print_aux_hex
+    cmp x21, #18            
+    b.eq print_aux_hex
+    cmp x21, #26            
     b.eq print_aux_hex
 
     // print HEX-dump (dump mem at pointer)
-    cmp x21, #25            //is it AT_RANDOM
+    cmp x21, #25            
     b.eq print_aux_hexdump
     // Maybe just the first 64 bytes?
-    cmp x21, #3             //is it AT_PHDR
+    cmp x21, #3             
     b.eq print_aux_hexdump
-    cmp x21, #33            //is it AT_SYSINFO_EHDR
+    cmp x21, #33            
+    b.eq print_aux_hexdump
+    cmp x21, #40            
+    b.eq print_aux_hexdump
+    cmp x21, #41            
+    b.eq print_aux_hexdump
+    cmp x21, #42            
+    b.eq print_aux_hexdump
+    cmp x21, #43            
     b.eq print_aux_hexdump
 
 print_aux_unknown:
     // Debug - we found something else
-    mov x0, x21 //#'?'
-    bl my_putchar
+    //mov x0, x21             // copy x21 to work with my_itoa
+    //ldr x1, =buffer         // set output buffer
+    //bl my_itoa              // call my_itoa to get the number
+
+    //ldr x0, =buffer         // load buffer to print into x0
+    //bl my_puts              // and print it
+
+    //ldr x0, =newline        // load newline into x0
+    //bl my_puts              // and print it
 
     ldr x0, =newline        // load newline into x0
     bl my_puts              // and print it
@@ -248,9 +289,8 @@ print_aux_hexdump:
     b print_aux
 
 print_aux_hex:
-    //ldr x0, =hex_prefix
     mov x0, #'H'
-    bl my_puts
+    bl my_putchar
 
     ldr x0, =newline        // load newline into x0
     bl my_puts              // and print it
@@ -264,6 +304,9 @@ print_aux_numeric:
     
     ldr x0, =buffer
     bl my_puts
+
+    ldr x0, =newline        // load newline into x0
+    bl my_puts              // and print it
 
     b print_aux
 
