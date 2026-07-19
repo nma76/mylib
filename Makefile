@@ -2,8 +2,8 @@ CC=gcc
 CFLAGS=-Wall -Iinclude
 
 # Assemblybibliotek
-SRC := $(wildcard src/*.S)
-OBJ := $(patsubst src/%.S,obj/%.o,$(SRC))
+SRC := $(wildcard src/lib/*.S)
+OBJ := $(patsubst src/lib/%.S,obj/%.o,$(SRC))
 
 # Tester
 TEST_SRC := $(wildcard tests/*.c)
@@ -33,7 +33,7 @@ bin/%: src/apps/%/start.S libmylib.a
 	ld obj/$*.o libmylib.a -o $@
 
 # Generell regel för .o från src/*.S
-obj/%.o: src/%.S
+obj/%.o: src/lib/%.S
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
