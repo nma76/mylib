@@ -10,8 +10,13 @@ extern unsigned assertions;
 extern unsigned failures;
 
 void test_atoi(void);
+void test_getchar(void);
 void test_itoa(void);
 void test_memcpy(void);
+void test_memset(void);
+void test_putchar(void);
+void test_puts(void);
+void test_read(void);
 void test_strlen(void);
 
 #define ASSERT_TRUE(expr) \
