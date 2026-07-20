@@ -17,7 +17,12 @@ void test_memset(void);
 void test_putchar(void);
 void test_puts(void);
 void test_read(void);
+void test_strchr(void);
+void test_strcmp(void);
+void test_strcpy(void);
 void test_strlen(void);
+void test_utoa(void);
+void test_write(void);
 
 #define ASSERT_TRUE(expr) \
     do { \
@@ -32,12 +37,30 @@ void test_strlen(void);
     do { \
         assertions++; \
         if((a) !=(b)) { \
-            fprintf(stderr, "Assertion failed: %s == %s (%ld != %ld) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
+            fprintf(stderr, "Assertion failed: %s == %s (%d != %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
             failures++; \
         } \
     } while (0) 
 
-//TODO: Use my_strcmp
+#define ASSERT_LT(a, b) \
+    do { \
+        assertions++; \
+        if((a) >=(b)) { \
+            fprintf(stderr, "Assertion failed: %s <= %s (%d <= %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
+            failures++; \
+        } \
+    } while (0) 
+
+#define ASSERT_GT(a, b) \
+    do { \
+        assertions++; \
+        if((a) <=(b)) { \
+            fprintf(stderr, "Assertion failed: %s >= %s (%d >= %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
+            failures++; \
+        } \
+    } while (0) 
+
+
 #define ASSERT_STR_EQ(a, b) \
     do { \
         assertions++; \

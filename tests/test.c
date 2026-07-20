@@ -32,9 +32,22 @@ int main(void) {
     test_read();
 
     tests_run++;
+    test_strchr();
+
+    tests_run++;
+    test_strcmp();  
+
+    tests_run++;
+    test_strcpy();  
+
+    tests_run++;
     test_strlen();
 
+    tests_run++;
+    test_utoa();
 
+    tests_run++;
+    test_write();
 
     printf("\n\n------------------------------------------\n");
     printf("Tests run: %d\n", tests_run);

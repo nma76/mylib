@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include "mylib.h"
+#include "test.h"
+
+void test_strchr(void) {
+    printf("Running my_strchr...\n");
+
+    char search;
+
+    const char *source1 = "Hejsan!";
+    search = 'j';
+    char *result1 = my_strchr(source1, search);
+    ASSERT_STR_EQ(result1, "jsan!");
+
+    const char *source2 = "Hello!";
+    search = 'j';
+    char *result2 = my_strchr(source2, search);
+    ASSERT_EQ(result2, NULL);
+
+
+    printf("Done!\n\n");
+}
