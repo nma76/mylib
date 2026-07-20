@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_atoi(void) {
-    printf("Running my_atoi...\n");
+    printf("Testing my_atoi...\n");
 
     // holds the results
     int result;

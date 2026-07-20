@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_memset(void) {
-    printf("Running my_memset...\n");
+    printf("Testing my_memset...\n");
 
     char b[10];
     my_memset(b, 65, sizeof(b));

@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_putchar(void) {
-    printf("Running my_putchar...\n");
+    printf("Testing my_putchar...\n");
 
     char chr;
     int result;

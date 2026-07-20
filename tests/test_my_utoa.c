@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_utoa(void) {
-    printf("Running my_utoa...\n");
+    printf("Testing my_utoa...\n");
 
     uint64_t source;
     char dest[33];

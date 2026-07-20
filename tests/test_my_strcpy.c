@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_strcpy(void) {
-    printf("Running my_strcpy...\n");
+    printf("Testing my_strcpy...\n");
 
     char source[] = "Hejsan";
     char dest[6];

@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_write(void) {
-    printf("Running my_write...\n");
+    printf("Testing my_write...\n");
 
     // message to print
     const char *message = "Hej från my_write\n";

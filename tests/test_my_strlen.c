@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_strlen(void) {
-    printf("Running my_strlen...\n");
+    printf("Testing my_strlen...\n");
 
     char *str = "Hejsan!";
     size_t len = my_strlen(str);

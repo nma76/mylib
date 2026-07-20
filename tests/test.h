@@ -9,6 +9,8 @@ extern unsigned tests_run;
 extern unsigned assertions;
 extern unsigned failures;
 
+typedef void (*test_fn)(void);
+
 void test_atoi(void);
 void test_getchar(void);
 void test_itoa(void);

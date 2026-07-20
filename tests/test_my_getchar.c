@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_getchar(void) {
-    printf("Running my_getchar...\n");
+    printf("Testing my_getchar...\n");
 
     // Create pipe. fda[1] = write, fds[0] = read
     int fds[2];

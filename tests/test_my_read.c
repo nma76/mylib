@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_read(void) {
-    printf("Running my_read...\n");
+    printf("Testing my_read...\n");
 
     // Create pipe. fda[1] = write, fds[0] = read
     int fds[2];

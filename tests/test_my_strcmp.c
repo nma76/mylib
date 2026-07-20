@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_strcmp(void) {
-    printf("Running my_strcmp...\n");
+    printf("Testing my_strcmp...\n");
 
     int result;
 

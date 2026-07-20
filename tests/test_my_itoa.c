@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_itoa(void) {
-    printf("Running my_itoa...\n");
+    printf("Testing my_itoa...\n");
 
     int source;
     char dest[33];

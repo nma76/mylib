@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_memcpy(void) {
-    printf("Running my_memcpy...\n");
+    printf("Testing my_memcpy...\n");
 
     int s1[] = {1, 2, 3, 4, 5};
     int d1[5];

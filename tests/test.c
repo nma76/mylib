@@ -6,48 +6,28 @@ unsigned tests_run = 0;
 unsigned assertions = 0;
 unsigned failures = 0;
 
+test_fn tests[] = {
+    test_atoi,
+    test_getchar,
+    test_itoa,
+    test_memcpy,
+    test_memset,
+    test_putchar,
+    test_puts,
+    test_read,
+    test_strchr,
+    test_strcmp,
+    test_strcpy,
+    test_strlen,
+    test_utoa,
+    test_write
+};
+
 int main(void) {
-    tests_run++;
-    test_atoi();
-
-    tests_run++;
-    test_getchar();
-
-    tests_run++;
-    test_itoa();
-
-    tests_run++;
-    test_memcpy();
-
-    tests_run++;
-    test_memset();
-
-    tests_run++;
-    test_putchar();
-
-    tests_run++;
-    test_puts();
-
-    tests_run++;
-    test_read();
-
-    tests_run++;
-    test_strchr();
-
-    tests_run++;
-    test_strcmp();  
-
-    tests_run++;
-    test_strcpy();  
-
-    tests_run++;
-    test_strlen();
-
-    tests_run++;
-    test_utoa();
-
-    tests_run++;
-    test_write();
+    for (size_t i = 0; i < sizeof(tests)/sizeof(tests[0]); i++) {
+        tests_run++;
+        tests[i]();
+    }
 
     printf("\n\n------------------------------------------\n");
     printf("Tests run: %d\n", tests_run);
@@ -56,4 +36,4 @@ int main(void) {
     printf("------------------------------------------\n");
 
     return 0;
-} 
+}

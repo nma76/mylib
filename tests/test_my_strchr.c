@@ -3,7 +3,7 @@
 #include "test.h"
 
 void test_strchr(void) {
-    printf("Running my_strchr...\n");
+    printf("Testing my_strchr...\n");
 
     char search;
 

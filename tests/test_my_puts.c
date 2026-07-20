@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_puts(void) {
-    printf("Running my_putchar...\n");
+    printf("Testing my_puts...\n");
 
     int result;
 
