@@ -1,40 +1,97 @@
-CC=gcc
-CFLAGS=-Wall -Iinclude
+CC      := gcc
+AS      := gcc
+LD      := ld
 
-# Assemblybibliotek
-SRC := $(wildcard src/lib/*.S)
-OBJ := $(patsubst src/lib/%.S,obj/%.o,$(SRC))
+CFLAGS  := -Wall -Iinclude
 
-# Tester
+#
+# ----------------------------------------------------------------------
+# Library
+# ----------------------------------------------------------------------
+#
+
+LIB_SRC := $(wildcard src/lib/*.S)
+LIB_OBJ := $(patsubst src/lib/%.S,obj/lib_%.o,$(LIB_SRC))
+
+LIBRARY := libmylib.a
+
+#
+# ----------------------------------------------------------------------
+# Applications
+# Each application lives in src/apps/<name>/
+# and must contain start.S
+# ----------------------------------------------------------------------
+#
+
+APP_DIRS := $(wildcard src/apps/*)
+APP_NAMES := $(notdir $(APP_DIRS))
+APP_BINS := $(addprefix bin/,$(APP_NAMES))
+
+#
+# ----------------------------------------------------------------------
+# Tests
+# One single test runner built from all C files in tests/
+# ----------------------------------------------------------------------
+#
+
 TEST_SRC := $(wildcard tests/*.c)
-TEST_BIN := $(addprefix bin/,$(notdir $(TEST_SRC:.c=)))
+TEST_BIN := bin/tests
 
-# Appar under src/apps/<app>/start.S
-APP_START := $(wildcard src/apps/*/start.S)
-APPS := $(notdir $(patsubst src/apps/%/start.S,%,$(APP_START)))
-APP_BIN := $(addprefix bin/,$(APPS))
+#
+# ----------------------------------------------------------------------
+# Default targets
+# ----------------------------------------------------------------------
+#
 
-all: libmylib.a tests apps
+.PHONY: all clean tests apps
 
-libmylib.a: $(OBJ)
-	ar rcs $@ $(OBJ)
+all: $(LIBRARY) tests apps
 
-tests: libmylib.a $(TEST_BIN)
+tests: $(TEST_BIN)
 
-apps: $(APP_BIN)
+apps: $(APP_BINS)
 
-# Bygg testbinärer
-bin/%: tests/%.c libmylib.a
-	$(CC) $(CFLAGS) $< -L. -lmylib -o $@
+#
+# ----------------------------------------------------------------------
+# Library
+# ----------------------------------------------------------------------
+#
 
-# Bygg app-binärer från start.S
-bin/%: src/apps/%/start.S libmylib.a
-	as $< -o obj/$*.o
-	ld obj/$*.o libmylib.a -o $@
+$(LIBRARY): $(LIB_OBJ)
+	ar rcs $@ $^
 
-# Generell regel för .o från src/*.S
-obj/%.o: src/lib/%.S
-	$(CC) $(CFLAGS) -c $< -o $@
+obj/lib_%.o: src/lib/%.S
+	@mkdir -p obj
+	$(CC) -c $< -o $@
+
+#
+# ----------------------------------------------------------------------
+# Test runner
+# ----------------------------------------------------------------------
+#
+
+$(TEST_BIN): $(TEST_SRC) $(LIBRARY)
+	@mkdir -p bin
+	$(CC) $(CFLAGS) $^ -L. -lmylib -o $@
+
+#
+# ----------------------------------------------------------------------
+# Applications
+# ----------------------------------------------------------------------
+#
+
+bin/%: src/apps/%/start.S $(LIBRARY)
+	@mkdir -p bin obj
+	$(AS) -c $< -o obj/$*.o
+	$(LD) obj/$*.o $(LIBRARY) -o $@
+
+#
+# ----------------------------------------------------------------------
+# Cleanup
+# ----------------------------------------------------------------------
+#
 
 clean:
-	rm -f libmylib.a bin/* obj/*
+	rm -rf obj/*
+	rm -rf bin/*
+	rm -f $(LIBRARY)

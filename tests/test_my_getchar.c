@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include "mylib.h"
+#include "test.h"
 
-int main(void)
-{
-    // print character
-    int r = my_getchar();
-    printf("\nReturn value was: %d\n", r);
+void test_getchar(void) {
+    printf("Running my_getchar...\n");
 
-    return 0;
+    printf("Done!\n\n");
 }

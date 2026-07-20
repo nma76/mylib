@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include "mylib.h"
+#include "test.h"
 
-int main(void)
-{
-    // source and destination
-    int s[] = {1, 2, 3, 4, 5};
-    int d[5];
+void test_memcpy(void) {
+    printf("Running my_memcpy...\n");
 
-    // copy memory
-    my_memcpy(d, s, 5 * sizeof(int));
+    int s1[] = {1, 2, 3, 4, 5};
+    int d1[5];
+    my_memcpy(d1, s1, 5 * sizeof(int));
+    ASSERT_ARR_EQ(s1, d1, 5);
 
-    // print result
-    for (int i=0; i<5; i++) {
-        printf("%d ", d[i]);
-    }
+    char s2[] = "12345";
+    char d2[5];
+    my_memcpy(d2, s2, 5 * sizeof(char));
+    ASSERT_ARR_EQ(s2, d2, 5);
 
-    return 0;
+    printf("Done!\n\n");
 }

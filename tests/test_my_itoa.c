@@ -1,28 +1,45 @@
 #include <stdio.h>
+#include <limits.h>
 #include "mylib.h"
+#include "test.h"
 
-int main(void)
-{
-    // value to convert to string
-    int source = -2147483648;
+void test_itoa(void) {
+    printf("Running my_itoa...\n");
 
-    // destination buffer
+    int source;
     char dest[33];
-
-    // result of conversion
     bool result = false;
+    char expected[33];
 
-    // do conversion
+    source = 42;
     result = my_itoa(source, dest);
+    sprintf(expected, "%d", 42);
+    ASSERT_TRUE(result);
+    ASSERT_STR_EQ(dest, expected);
 
-    // print results
-    printf("Integer to convert is %i\n", source);
-    printf("Returned value is %d\n", result);
-    printf("Converted string is: %s\n", dest);
+    source = -42;
+    result = my_itoa(source, dest);
+    sprintf(expected, "%d", -42);
+    ASSERT_TRUE(result);
+    ASSERT_STR_EQ(dest, expected);
 
-    // for(int i=0;i<=33;i++) {
-    //     printf("Char[%d] is: %c\n", i, dest[i]);
-    // }
+    source = +42;
+    result = my_itoa(source, dest);
+    sprintf(expected, "%d", 42);
+    ASSERT_TRUE(result);
+    ASSERT_STR_EQ(dest, expected);
 
-    return 0;
+    source = 0;
+    result = my_itoa(source, dest);
+    sprintf(expected, "%d", 0);
+    ASSERT_TRUE(result);
+    ASSERT_STR_EQ(dest, expected);
+
+    source = INT_MIN;
+    result = my_itoa(source, dest);
+    sprintf(expected, "%d", -2147483648);
+    ASSERT_TRUE(result);
+    ASSERT_STR_EQ(dest, expected);
+
+    printf("Done!\n\n");
 }

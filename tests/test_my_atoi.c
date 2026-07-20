@@ -1,27 +1,41 @@
 #include <stdio.h>
 #include "mylib.h"
+#include "test.h"
 
-int main(void)
-{
-    // string values to parse with my_atoi
-    const char *source[] = { "   123", "23", "543", "123-456", "-42", "+42", "+1+42", "", " ", "abx", "12 abc", "abc 123" };
-
-    // get number of strings to test
-    int arr_length = sizeof(source) / sizeof(source[0]);
+void test_atoi(void) {
+    printf("Running my_atoi...\n");
 
     // holds the results
     int result;
     bool status;
 
-    // iterate all strings and print status of parsing
-    for(int i=0; i<arr_length; i++) {
-        result = -999;
-        status = my_atoi(source[i], &result);
+    status = my_atoi("   123", &result);
+    ASSERT_EQ(status, true);
+    ASSERT_EQ(result, 123);
 
-        printf("Parsing the string: %s\n", source[i]);
-        printf("\t my_atoi returned status: %d\n", status);
-        printf("\t my_atoi parsed value: %d\n\n", result);
-    }
+    status = my_atoi("23", &result);
+    ASSERT_EQ(status, true);
+    ASSERT_EQ(result, 23);
 
-    return 0;
+    status = my_atoi("123-456", &result);
+    ASSERT_EQ(status, true);
+    ASSERT_EQ(result, 123);
+
+    status = my_atoi("-45", &result);
+    ASSERT_EQ(status, true);
+    ASSERT_EQ(result, -45);
+
+    status = my_atoi("abc123", &result);
+    ASSERT_EQ(status, false);
+    ASSERT_EQ(result, 0);
+
+    status = my_atoi("+42", &result);
+    ASSERT_EQ(status, true);
+    ASSERT_EQ(result, 42);
+
+    status = my_atoi("12 abc", &result);
+    ASSERT_EQ(status, true);
+    ASSERT_EQ(result, 12);
+
+    printf("Done!\n\n");
 }

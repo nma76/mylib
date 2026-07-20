@@ -1,16 +1,24 @@
 #include <stdio.h>
 #include "mylib.h"
+#include "test.h"
 
-int main(void)
-{
-    // create source and destination
-    char *s = "Hejsan!";
+void test_strlen(void) {
+    printf("Running my_strlen...\n");
 
-    // copy string
-    size_t l = my_strlen(s);
+    char *str = "Hejsan!";
+    size_t len = my_strlen(str);
+    size_t expected = 7;
+    ASSERT_EQ(len, expected);
 
-    // print result
-    printf("Length of string is: %li\n", l);
+    str = " Hello\n";
+    len = my_strlen(str);
+    expected = 7;
+    ASSERT_EQ(len, expected);
 
-    return 0;
+    str = "Hellö";
+    len = my_strlen(str);
+    expected = 6;
+    ASSERT_EQ(len, expected);
+
+    printf("Done!\n\n");
 }
