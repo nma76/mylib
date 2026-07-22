@@ -4,8 +4,6 @@
 #include "test.h"
 
 void test_read(void) {
-    printf("Testing my_read...\n");
-
     // Create pipe. fda[1] = write, fds[0] = read
     int fds[2];
     pipe(fds);
@@ -25,6 +23,4 @@ void test_read(void) {
     buf[12] = '\0';
     ASSERT_EQ(result, 12);
     ASSERT_STR_EQ(buf, "Hello world!");
-
-    printf("Done!\n\n");
 }

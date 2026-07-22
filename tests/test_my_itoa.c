@@ -4,8 +4,6 @@
 #include "test.h"
 
 void test_itoa(void) {
-    printf("Testing my_itoa...\n");
-
     int source;
     char dest[33];
     bool result = false;
@@ -40,6 +38,4 @@ void test_itoa(void) {
     sprintf(expected, "%d", -2147483648);
     ASSERT_TRUE(result);
     ASSERT_STR_EQ(dest, expected);
-
-    printf("Done!\n\n");
 }

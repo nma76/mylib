@@ -10,6 +10,10 @@ extern unsigned assertions;
 extern unsigned failures;
 
 typedef void (*test_fn)(void);
+struct test_case {
+    const char *name;
+    test_fn fn;
+};
 
 void test_atoi(void);
 void test_getchar(void);
@@ -48,7 +52,7 @@ void test_write(void);
     do { \
         assertions++; \
         if((a) >=(b)) { \
-            fprintf(stderr, "Assertion failed: %s <= %s (%d <= %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
+            fprintf(stderr, "Assertion failed: %s < %s (%d <= %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
             failures++; \
         } \
     } while (0) 
@@ -57,7 +61,7 @@ void test_write(void);
     do { \
         assertions++; \
         if((a) <=(b)) { \
-            fprintf(stderr, "Assertion failed: %s >= %s (%d >= %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
+            fprintf(stderr, "Assertion failed: %s > %s (%d >= %d) at %s:%d\n", #a, #b, (a), (b), __FILE__, __LINE__); \
             failures++; \
         } \
     } while (0) 

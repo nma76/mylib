@@ -3,8 +3,6 @@
 #include "test.h"
 
 void test_strchr(void) {
-    printf("Testing my_strchr...\n");
-
     char search;
 
     const char *source1 = "Hejsan!";
@@ -16,7 +14,4 @@ void test_strchr(void) {
     search = 'j';
     char *result2 = my_strchr(source2, search);
     ASSERT_EQ(result2, NULL);
-
-
-    printf("Done!\n\n");
 }

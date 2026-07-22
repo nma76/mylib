@@ -4,8 +4,6 @@
 #include "test.h"
 
 void test_getchar(void) {
-    printf("Testing my_getchar...\n");
-
     // Create pipe. fda[1] = write, fds[0] = read
     int fds[2];
     pipe(fds);
@@ -21,6 +19,4 @@ void test_getchar(void) {
     // Call getchar and evaluate the result
     int c = my_getchar();
     ASSERT_EQ(c, 'A');
-
-    printf("Done!\n\n");
 }

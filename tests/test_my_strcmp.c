@@ -3,8 +3,6 @@
 #include "test.h"
 
 void test_strcmp(void) {
-    printf("Testing my_strcmp...\n");
-
     int result;
 
     char *str11 = "Hejsan";
@@ -21,6 +19,4 @@ void test_strcmp(void) {
     char *str32 = "Hejsan";
     result = my_strcmp(str31, str32);
     ASSERT_GT(str31, str32);
-
-    printf("Done!\n\n");
 }

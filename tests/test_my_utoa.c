@@ -4,8 +4,6 @@
 #include "test.h"
 
 void test_utoa(void) {
-    printf("Testing my_utoa...\n");
-
     uint64_t source;
     char dest[33];
     bool result = false;
@@ -39,6 +37,4 @@ void test_utoa(void) {
     result = my_utoa(source, dest);
     sprintf(expected, "%ld", 0);
     ASSERT_EQ(result, 1);
-
-    printf("Done!\n\n");
 }

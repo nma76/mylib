@@ -3,8 +3,6 @@
 #include "test.h"
 
 void test_strlen(void) {
-    printf("Testing my_strlen...\n");
-
     char *str = "Hejsan!";
     size_t len = my_strlen(str);
     size_t expected = 7;
@@ -19,6 +17,4 @@ void test_strlen(void) {
     len = my_strlen(str);
     expected = 6;
     ASSERT_EQ(len, expected);
-
-    printf("Done!\n\n");
 }

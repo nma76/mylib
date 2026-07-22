@@ -6,33 +6,35 @@ unsigned tests_run = 0;
 unsigned assertions = 0;
 unsigned failures = 0;
 
-test_fn tests[] = {
-    test_atoi,
-    test_getchar,
-    test_itoa,
-    test_memcpy,
-    test_memset,
-    test_putchar,
-    test_puts,
-    test_read,
-    test_strchr,
-    test_strcmp,
-    test_strcpy,
-    test_strlen,
-    test_utoa,
-    test_write
+struct test_case tests[] = {
+    { "my_atoi", test_atoi},
+    { "my_getchar", test_getchar},
+    { "my_itoa", test_itoa},
+    { "my_mamcpy", test_memcpy},
+    { "my_memset", test_memset},
+    { "my_putchar", test_putchar},
+    { "my_puts", test_puts},
+    { "my_read", test_read},
+    { "my_strchr", test_strchr},
+    { "my_strcmp", test_strcmp},
+    { "my_strcpy", test_strcpy},
+    { "my_strlen", test_strlen},
+    { "my_utoa", test_utoa},
+    { "my_write", test_write}
 };
 
 int main(void) {
     for (size_t i = 0; i < sizeof(tests)/sizeof(tests[0]); i++) {
         tests_run++;
-        tests[i]();
+        printf("Running test: %-20s", tests[i].name);
+        tests[i].fn();
+        printf("Done!\n");
     }
 
     printf("\n\n------------------------------------------\n");
-    printf("Tests run: %d\n", tests_run);
-    printf("Assertions run: %d\n", assertions);
-    printf("Failed: %d\n", failures);
+    printf("Tests run: %u\n", tests_run);
+    printf("Assertions run: %u\n", assertions);
+    printf("Failed: %u\n", failures);
     printf("------------------------------------------\n");
 
     return 0;

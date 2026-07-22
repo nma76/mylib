@@ -4,8 +4,6 @@
 #include "test.h"
 
 void test_puts(void) {
-    printf("Testing my_puts...\n");
-
     // save original stdout
     int saved_stdout = dup(1);
 
@@ -30,6 +28,4 @@ void test_puts(void) {
     // restore stdout
     dup2(saved_stdout, 1);
     close(saved_stdout);
-
-    printf("Done!\n\n");
 }

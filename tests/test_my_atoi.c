@@ -3,8 +3,6 @@
 #include "test.h"
 
 void test_atoi(void) {
-    printf("Testing my_atoi...\n");
-
     // holds the results
     int result;
     bool status;
@@ -36,6 +34,4 @@ void test_atoi(void) {
     status = my_atoi("12 abc", &result);
     ASSERT_EQ(status, true);
     ASSERT_EQ(result, 12);
-
-    printf("Done!\n\n");
 }

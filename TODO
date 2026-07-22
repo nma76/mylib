@@ -1,5 +1,29 @@
 1. runtime.S
+    runtime_init
+        Den gör bara en sak: Den sparar undan de fyra pekarna.
+
+        runtime_argc_storage
+        runtime_argv_storage
+        runtime_envp_storage
+        runtime_auxv_storage
+
+    runtime_argc
+        Returnerar x0 = argc
+
+    runtime_argv
+        Returnerar x0 = argv
+
+    runtime_envp
+        Returnerar x0 = argc
+
+    runtime_auxv
 
 2. output modul
 
 3. sysinfo modul
+
+
+
+ASSERT_EQ_INT
+ASSERT_EQ_UINT
+ASSERT_EQ_SIZE
